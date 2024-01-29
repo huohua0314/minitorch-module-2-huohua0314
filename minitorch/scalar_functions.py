@@ -7,7 +7,7 @@ import minitorch
 from . import operators
 from .autodiff import Context
 
-from .autodiff import central_difference ## TODO: does it needs?
+from .autodiff import central_difference  ## TODO: does it needs?
 
 if TYPE_CHECKING:
     from typing import Tuple
@@ -83,7 +83,6 @@ class Add(ScalarFunction):
         return d_output, d_output
 
 
-
 class Log(ScalarFunction):
     "Log function $f(x) = log(x)$"
 
@@ -107,7 +106,7 @@ class Mul(ScalarFunction):
     @staticmethod
     def forward(ctx: Context, a: float, b: float) -> float:
         # TODO: Implement for Task 1.2.
-        ctx.save_for_backward(a,b)
+        ctx.save_for_backward(a, b)
         return operators.mul(a, b)
         raise NotImplementedError("Need to implement for Task 1.2")
 
@@ -116,7 +115,7 @@ class Mul(ScalarFunction):
         # TODO: Implement for Task 1.4.
         saved = ctx.saved_tensors
         print(saved)
-        return  (saved[1] * d_output , saved[0] * d_output)
+        return (saved[1] * d_output, saved[0] * d_output)
         raise NotImplementedError("Need to implement for Task 1.4")
 
 
@@ -143,7 +142,7 @@ class Neg(ScalarFunction):
     @staticmethod
     def forward(ctx: Context, a: float) -> float:
         # TODO: Implement for Task 1.2.
-        return operators.neg(a) 
+        return operators.neg(a)
         raise NotImplementedError("Need to implement for Task 1.2")
 
     @staticmethod
@@ -184,7 +183,7 @@ class ReLU(ScalarFunction):
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:
         # TODO: Implement for Task 1.4.
-        return  operators.relu_back(*ctx.saved_tensors, d_output)
+        return operators.relu_back(*ctx.saved_tensors, d_output)
         raise NotImplementedError("Need to implement for Task 1.4")
 
 
@@ -211,8 +210,8 @@ class LT(ScalarFunction):
     @staticmethod
     def forward(ctx: Context, a: float, b: float) -> float:
         # TODO: Implement for Task 1.2.
-        ctx.save_for_backward(a,b)
-        return operators.lt(a,b)
+        ctx.save_for_backward(a, b)
+        return operators.lt(a, b)
         raise NotImplementedError("Need to implement for Task 1.2")
 
     @staticmethod
@@ -229,13 +228,13 @@ class EQ(ScalarFunction):
     @staticmethod
     def forward(ctx: Context, a: float, b: float) -> float:
         # TODO: Implement for Task 1.2.
-        ctx.save_for_backward(a,b)
-        return operators.eq(a,b)
+        ctx.save_for_backward(a, b)
+        return operators.eq(a, b)
         raise NotImplementedError("Need to implement for Task 1.2")
 
     @staticmethod
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
         # TODO: Implement for Task 1.4.
         saved = ctx.saved_tensors
-        return 0.0, 0.0 
+        return 0.0, 0.0
         raise NotImplementedError("Need to implement for Task 1.4")

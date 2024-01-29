@@ -104,7 +104,7 @@ def log(x: float) -> float:
 
 def exp(x: float) -> float:
     "$f(x) = e^{x}$"
-    return math.exp(x) 
+    return math.exp(x)
 
 
 def log_back(x: float, d: float) -> float:

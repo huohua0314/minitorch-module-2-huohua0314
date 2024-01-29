@@ -106,12 +106,12 @@ class Scalar:
 
     def __gt__(self, b: ScalarLike) -> Scalar:
         # TODO: Implement for Task 1.2.
-        return  LT.apply(b, self) 
+        return LT.apply(b, self)
         raise NotImplementedError("Need to implement for Task 1.2")
 
     def __eq__(self, b: ScalarLike) -> Scalar:  # type: ignore[override]
         # TODO: Implement for Task 1.2.
-        return EQ.apply(self,b)
+        return EQ.apply(self, b)
         raise NotImplementedError("Need to implement for Task 1.2")
 
     def __sub__(self, b: ScalarLike) -> Scalar:
@@ -185,12 +185,10 @@ class Scalar:
 
         ret = []
 
-        for x, y in zip(h.last_fn._backward(h.ctx, d_output),self.parents):
-        
-            ret.append((y,x))
+        for x, y in zip(h.last_fn._backward(h.ctx, d_output), self.parents):
+            ret.append((y, x))
 
         return ret
-            
 
         # TODO: Implement for Task 1.3.
 

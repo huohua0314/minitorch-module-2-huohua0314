@@ -10,8 +10,8 @@ import minitorch
 class Network(minitorch.Module):
     def __init__(self, hidden_layers):
         super().__init__()
-        self.layer1 = Linear(2,hidden_layers)
-        self.layer2 = Linear(hidden_layers,hidden_layers)
+        self.layer1 = Linear(2, hidden_layers)
+        self.layer2 = Linear(hidden_layers, hidden_layers)
         self.layer3 = Linear(hidden_layers, 1)
         # TODO: Implement for Task 1.5.
         # raise NotImplementedError("Need to implement for Task 1.5")
@@ -44,13 +44,13 @@ class Linear(minitorch.Module):
 
     def forward(self, inputs):
         # TODO: Implement for Task 1.5.
-        
-        y = [ i.value for i in self.bias]
 
-        for x ,n in enumerate(inputs):
+        y = [i.value for i in self.bias]
+
+        for x, n in enumerate(inputs):
             for z in range(len(y)):
                 y[z] += self.weights[x][z].value * n
-        
+
         return y
         raise NotImplementedError("Need to implement for Task 1.5")
 
