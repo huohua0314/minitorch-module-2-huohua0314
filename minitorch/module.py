@@ -31,11 +31,20 @@ class Module:
 
     def train(self) -> None:
         "Set the mode of this module and all descendent modules to `train`."
-        raise NotImplementedError("Need to include this file from past assignment.")
+        # TODO: Implement for Task 0.4.
+        self.training = True
+
+        for x in self.modules():
+            x.train()
+        # raise NotImplementedError("Need to implement for Task 0.4")
 
     def eval(self) -> None:
         "Set the mode of this module and all descendent modules to `eval`."
-        raise NotImplementedError("Need to include this file from past assignment.")
+        # TODO: Implement for Task 0.4.
+        self.training = False
+        for x in self.modules():
+            x.eval()
+        # raise NotImplementedError("Need to implement for Task 0.4")
 
     def named_parameters(self) -> Sequence[Tuple[str, Parameter]]:
         """
@@ -45,11 +54,27 @@ class Module:
         Returns:
             The name and `Parameter` of each ancestor parameter.
         """
-        raise NotImplementedError("Need to include this file from past assignment.")
+        # TODO: Implement for Task 0.4.
+        ret = []
+        for x, y in self._parameters.items():
+            ret.append((str(x), y))
+        for z, b in self._modules.items():
+            a = b.named_parameters()
+            for x1, x2 in a:
+                ret.append((f"{z}.{x1}", x2))
+        return ret
+        # raise NotImplementedError("Need to implement for Task 0.4")
 
     def parameters(self) -> Sequence[Parameter]:
         "Enumerate over all the parameters of this module and its descendents."
-        raise NotImplementedError("Need to include this file from past assignment.")
+        # TODO: Implement for Task 0.4.
+        ret = []
+        for _, y in self._parameters.items():
+            ret.append(y)
+        for z in self.modules():
+            ret.extend(z.parameters())
+        return ret
+        # raise NotImplementedError("Need to implement for Task 0.4")
 
     def add_parameter(self, k: str, v: Any) -> Parameter:
         """
@@ -115,9 +140,9 @@ class Module:
 
 class Parameter:
     """
-    A Parameter is a special container stored in a `Module`.
+    A Parameter is a special container stored in a :class:`Module`.
 
-    It is designed to hold a `Variable`, but we allow it to hold
+    It is designed to hold a :class:`Variable`, but we allow it to hold
     any value for testing.
     """
 
