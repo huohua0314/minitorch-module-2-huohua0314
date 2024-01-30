@@ -22,6 +22,9 @@ class Network(minitorch.Module):
 
     def forward(self, x):
         # TODO: Implement for Task 2.5.
+        x= self.layer1.forward(x)
+        x = self.layer2.forward(x)
+        return self.layer3.forward(x)
         raise NotImplementedError("Need to implement for Task 2.5")
 
 
@@ -33,7 +36,11 @@ class Linear(minitorch.Module):
         self.out_size = out_size
 
     def forward(self, x):
+        temp = self.weights * x
+        temp = temp.sum(dim=1)
+        temp = temp + self.bias
         # TODO: Implement for Task 2.5.
+
         raise NotImplementedError("Need to implement for Task 2.5")
 
 

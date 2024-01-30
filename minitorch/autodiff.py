@@ -86,11 +86,13 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     ret = []
     while not q.empty():
         a = q.get()
+
         ret.append(a)
-        if a.is_leaf():
-            continue
+
+        if a.is_constant() or a.is_leaf():
+            continue 
         for i in a.parents:
-            if not i.unique_id in s:
+            if not i.unique_id in s :
                 s.add(i.unique_id)
                 q.put(i)
 
@@ -111,7 +113,8 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
     # TODO: Implement for Task 1.4.
-
+    if variable.is_constant():
+        return
     if variable.is_leaf():
         variable.accumulate_derivative(deriv)
         return
@@ -123,7 +126,7 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     my_dict[variable.unique_id] = deriv
 
     for x in s:
-        if x.is_leaf():
+        if x.is_leaf() or x.is_constant():
             continue
         z = x.chain_rule(my_dict[x.unique_id])
         for t in z:
